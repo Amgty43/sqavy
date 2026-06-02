@@ -1,0 +1,190 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sqavy Live Demo</title><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,Arial,sans-serif;background:linear-gradient(135deg,#0f172a,#1F4E79);color:#fff;min-height:100vh;padding:20px;display:flex;flex-direction:column;align-items:center}
+h1{font-size:34px;font-weight:800;text-align:center}h1 span{color:#60a5fa}
+header p{font-size:15px;opacity:.75;margin:4px 0 20px;text-align:center}
+.stage{display:flex;gap:32px;flex-wrap:wrap;justify-content:center;margin:20px 0}
+.pw{display:flex;flex-direction:column;align-items:center;gap:12px}
+.plbl{font-size:12px;font-weight:600;opacity:.8;text-transform:uppercase;letter-spacing:1px}
+.plbl.alt{color:#fca5a5}
+.phone{width:280px;height:580px;background:#1a1a1a;border-radius:38px;padding:12px;box-shadow:0 30px 80px rgba(0,0,0,.5);position:relative}
+.phone::before{content:"";position:absolute;top:18px;left:50%;transform:translateX(-50%);width:80px;height:22px;background:#000;border-radius:12px;z-index:5}
+.scr{width:100%;height:100%;background:#fff;border-radius:28px;overflow:hidden;display:flex;flex-direction:column;color:#111}
+.sbar{height:40px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:600}
+.cv{flex:1;background:linear-gradient(180deg,#1e293b,#0f172a);color:#fff;display:none;flex-direction:column;align-items:center;justify-content:center;padding:0 24px}
+.cv.on{display:flex}
+.cs{font-size:12px;opacity:.7;margin-bottom:20px;letter-spacing:1px;text-transform:uppercase}
+.av{width:100px;height:100px;background:linear-gradient(135deg,#1F4E79,#60a5fa);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;margin-bottom:14px;animation:pulse 1.4s infinite}
+.av.np{animation:none;opacity:.6}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(96,165,250,.7)}50%{box-shadow:0 0 0 22px rgba(96,165,250,0)}}
+.nm{font-size:22px;font-weight:700;text-align:center}
+.nu{font-size:13px;opacity:.6;margin-top:4px;margin-bottom:28px}
+.rt{margin-top:24px;font-size:13px;opacity:.5;animation:bl 1s infinite}
+@keyframes bl{0%,100%{opacity:.4}50%{opacity:.8}}
+.hv{flex:1;background:linear-gradient(180deg,#fbbf24,#f59e0b);display:none;padding:60px 16px 16px}
+.hv.on{display:flex;flex-direction:column;align-items:center}
+.mb{background:rgba(0,0,0,.85);color:#fff;border-radius:14px;padding:14px;width:100%}
+.ml{font-size:11px;opacity:.6;text-transform:uppercase}
+.mn{font-size:15px;font-weight:600;margin-top:2px}
+.mt{font-size:11px;opacity:.6;margin-top:4px}
+.mc{background:#dc2626;color:#fff;border-radius:12px;padding:10px;margin-top:14px;text-align:center;font-size:13px;font-weight:600}
+.chv{flex:1;background:#f3f4f6;display:none;flex-direction:column}
+.chv.on{display:flex}
+.chh{background:#fff;border-bottom:1px solid #e5e7eb;padding:8px 14px;display:flex;align-items:center;gap:10px}
+.ha{width:32px;height:32px;background:#1F4E79;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.hn{font-size:14px;font-weight:600}
+.hs{font-size:11px;color:#6b7280}
+.chb{flex:1;padding:14px;overflow-y:scroll;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.chb::-webkit-scrollbar{width:8px}
+.chb::-webkit-scrollbar-track{background:#e5e7eb;border-radius:4px}
+.chb::-webkit-scrollbar-thumb{background:#1F4E79;border-radius:4px;border:1px solid #e5e7eb}
+.chb::-webkit-scrollbar-thumb:hover{background:#163a5c}
+.msg{max-width:78%;padding:8px 12px;border-radius:16px;font-size:13px;line-height:1.4;animation:sl .3s}
+.msg.f{background:#fff;align-self:flex-start;border-bottom-left-radius:4px}
+.msg.m{background:#1F4E79;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.msg .t{display:block;font-size:10px;opacity:.6;margin-top:4px}
+@keyframes sl{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.tp{background:#fff;align-self:flex-start;padding:12px 16px;border-radius:16px;display:none}
+.tp.on{display:block}
+.td{display:inline-block;width:6px;height:6px;background:#9ca3af;border-radius:50%;margin:0 2px;animation:td 1.4s infinite}
+.td:nth-child(2){animation-delay:.2s}
+.td:nth-child(3){animation-delay:.4s}
+@keyframes td{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-6px);opacity:1}}
+.bc{background:linear-gradient(135deg,#1F4E79,#2E74B5);color:#fff;padding:14px;border-radius:14px;align-self:flex-start;max-width:90%}
+.bc h4{font-size:13px;margin-bottom:8px}
+.bc .sl{background:rgba(255,255,255,.2);padding:8px 10px;border-radius:8px;font-size:12px;margin:4px 0}
+.ctrl{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{background:#fff;color:#1F4E79;border:none;padding:14px 30px;font-size:16px;font-weight:700;border-radius:10px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.2)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.sec{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4)}
+.tr{background:#fff;color:#111;border-radius:14px;padding:20px;max-width:720px;width:100%;margin-top:24px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.trt{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:#1F4E79;font-weight:700;margin-bottom:14px;border-bottom:2px solid #DEEBF6;padding-bottom:10px}
+.tm{margin-bottom:14px;display:flex;gap:12px;animation:sl .3s}
+.tb{flex-shrink:0;width:64px;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.tm.s .tb{background:#1F4E79;color:#fff}
+.tm.c .tb{background:#f3f4f6;color:#6b7280;border:1px solid #e5e7eb}
+.tbd{flex:1;font-size:14px;line-height:1.55;color:#374151}
+.tbd .w{font-weight:700;font-size:11px;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:.5px;opacity:.7}
+.tm.s .w{color:#1F4E79;opacity:1}
+.tph{display:inline-block;background:#e5e7eb;padding:6px 12px;border-radius:6px;color:#4b5563;font-size:13px}
+.tsl{background:#DEEBF6;border-radius:8px;padding:10px;margin-top:8px;font-size:13px;color:#1F4E79;line-height:1.7}
+.tsl b{display:block;margin-bottom:4px}
+.log{background:rgba(0,0,0,.4);border-radius:10px;padding:14px;max-width:720px;width:100%;margin-top:16px;font-family:Consolas,monospace;font-size:11px;line-height:1.5;min-height:60px}
+.lt{font-size:10px;text-transform:uppercase;opacity:.6;margin-bottom:6px}
+.ll{opacity:0;animation:li .3s forwards}
+.ll .lti{color:#60a5fa}
+.ll .lv{color:#fbbf24}
+.ll.ok .lv{color:#22c55e}
+.ll.er .lv{color:#ef4444}
+@keyframes li{to{opacity:1}}
+.sp{background:rgba(34,197,94,.15);border:2px solid rgba(34,197,94,.5);border-radius:14px;padding:22px;max-width:720px;width:100%;margin-top:16px;display:none}
+.sp.on{display:block;animation:sl .5s}
+.sp h3{font-size:19px;margin-bottom:14px;text-align:center;color:#86efac}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px}
+.st{text-align:center}
+.sv{font-size:24px;font-weight:800;color:#fff}
+.slb{font-size:11px;opacity:.7;margin-top:3px}
+@media(max-width:720px){.stage{flex-direction:column}.phone{width:240px;height:500px}h1{font-size:24px}}
+</style></head><body>
+<header><h1><span>Sqavy</span> Live Demo</h1><p>What happens when a customer calls — and you can't pick up.</p></header>
+<div class="stage">
+<div class="pw"><div class="plbl">Customer's Phone</div><div class="phone"><div class="scr"><div class="sbar"><span>9:42</span><span>📶 🔋</span></div>
+<div class="cv on" id="cc"><div class="cs">Calling…</div><div class="av">NH</div><div class="nm">Napolez Home Services</div><div class="nu">(813) 706-8798</div><div class="rt">Ringing…</div></div>
+<div class="chv" id="ch"><div class="chh"><div class="ha">N</div><div><div class="hn">Napolez Home Services</div><div class="hs">SMS · +1 (813) 694-5720</div></div></div><div class="chb" id="cb"></div></div>
+</div></div></div>
+<div class="pw"><div class="plbl alt" id="bl">Sam's Phone — without Sqavy</div><div class="phone"><div class="scr"><div class="sbar"><span>9:42</span><span>📶 🔋</span></div>
+<div class="cv on" id="bc"><div class="cs">Incoming Call</div><div class="av np">📞</div><div class="nm">Unknown</div><div class="nu">(727) 555-0184</div><div class="rt">…on a job, can't answer</div></div>
+<div class="hv" id="bh"><div class="mb"><div class="ml">⚠ Missed Call</div><div class="mn">Unknown · (727) 555-0184</div><div class="mt">9:42 AM — 7 seconds ago</div></div><div class="mc" id="bz">Without Sqavy:<br>$300 walks out the door</div></div>
+</div></div></div>
+</div>
+<div class="ctrl"><button class="btn" id="sb">▶ Simulate Missed Call</button><button class="btn sec" id="rb">Reset</button></div>
+<div class="tr" id="tr" style="display:none"><div class="trt">📱 Full Conversation Transcript</div><div id="tbd"></div></div>
+<div class="log"><div class="lt">⚙ Sqavy System Log</div><div id="lb"><div class="ll"><span class="lti">[--:--:--]</span> <span class="lv">[idle]</span> Waiting for trigger…</div></div></div>
+<div class="sp" id="sp"><h3>✓ Lead Recovered with Sqavy</h3><div class="sg">
+<div class="st"><div class="sv">25s</div><div class="slb">Response Time</div></div>
+<div class="st"><div class="sv">$180-250</div><div class="slb">Job Booked</div></div>
+<div class="st"><div class="sv">$0</div><div class="slb">Sam's Time</div></div>
+<div class="st"><div class="sv">Sat 10 AM</div><div class="slb">Appointment</div></div>
+</div></div>
+<script>
+const $=i=>document.getElementById(i);
+const cc=$('cc'),ch=$('ch'),cb=$('cb'),bc=$('bc'),bh=$('bh'),bl=$('bl'),bz=$('bz');
+const sb=$('sb'),rb=$('rb'),lb=$('lb'),sp=$('sp'),tr=$('tr'),tbd=$('tbd');
+const z=ms=>new Promise(r=>setTimeout(r,ms));
+const lt=()=>{const d=new Date();return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}`};
+function log(l,t,c=''){const e=document.createElement('div');e.className='ll '+c;e.innerHTML=`<span class="lti">[${lt()}]</span> <span class="lv">[${l}]</span> ${t}`;lb.appendChild(e);lb.scrollTop=lb.scrollHeight}
+const setB=v=>{bc.classList.toggle('on',v=='c');bh.classList.toggle('on',v=='h')};
+const setC=v=>{cc.classList.toggle('on',v=='c');ch.classList.toggle('on',v=='ch')};
+const clr=()=>{cb.innerHTML='';tbd.innerHTML=''};
+function te(s,t,o={}){
+  const w=document.createElement('div');w.className='tm '+(s=='f'?'s':'c');
+  const who=s=='f'?'Napolez Home Services':'Customer';
+  const bg=s=='f'?'NAPOLEZ':'CALLER';
+  let b=`<span class="w">${who}</span>`;
+  if(o.ph)b+=`<span class="tph">📷 Photo attached</span>`;
+  else if(o.sl)b+=`${t}<div class="tsl"><b>📅 Available slots:</b>Sat, May 16 · 10:00 AM<br>Sat, May 16 · 1:00 PM<br>Sun, May 17 · 9:00 AM<br>Sun, May 17 · 2:00 PM</div>`;
+  else b+=t;
+  w.innerHTML=`<div class="tb">${bg}</div><div class="tbd">${b}</div>`;tbd.appendChild(w);
+}
+async function am(t,s,o={}){
+  if(o.tp){const e=document.createElement('div');e.className='tp on';e.innerHTML='<span class="td"></span><span class="td"></span><span class="td"></span>';cb.appendChild(e);if(cb.scrollHeight-cb.scrollTop-cb.clientHeight<150)cb.scrollTop=cb.scrollHeight;await z(o.tp);e.remove()}
+  const m=document.createElement('div');m.className='msg '+s;m.innerHTML=`${t}<span class="t">${lt().substring(0,5)}</span>`;cb.appendChild(m);if(cb.scrollHeight-cb.scrollTop-cb.clientHeight<150)cb.scrollTop=cb.scrollHeight;te(s,t)
+}
+async function ap(s){
+  const m=document.createElement('div');m.className='msg '+s;m.style.padding=0;m.style.overflow='hidden';
+  m.innerHTML='<div style="width:140px;height:100px;background:linear-gradient(135deg,#94a3b8,#475569);display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;border-radius:12px">📷</div><span class="t" style="padding:0 8px 6px;display:block">'+lt().substring(0,5)+'</span>';
+  cb.appendChild(m);if(cb.scrollHeight-cb.scrollTop-cb.clientHeight<150)cb.scrollTop=cb.scrollHeight;te(s,'',{ph:1})
+}
+async function ab(){
+  const c=document.createElement('div');c.className='bc';
+  c.innerHTML='<h4>📅 Pick a time that works for you:</h4><div class="sl">Sat 5/16 · 10:00 AM</div><div class="sl">Sat 5/16 · 1:00 PM</div><div class="sl">Sun 5/17 · 9:00 AM</div><div class="sl">Sun 5/17 · 2:00 PM</div>';
+  cb.appendChild(c);if(cb.scrollHeight-cb.scrollTop-cb.clientHeight<150)cb.scrollTop=cb.scrollHeight;
+  te('f',"Saturday is wide open. Pick a time below and I'll lock it in:",{sl:1})
+}
+
+let R=false;
+async function run(){
+  if(R)return;R=true;sb.disabled=true;sp.classList.remove('on');tr.style.display='block';clr();lb.innerHTML='';
+  setC('c');setB('c');bl.textContent="Sam's Phone — on a job, can't answer";bz.style.display='block';
+  // -- The setup: customer calls, Sam can't pick up. Let this register. --
+  log('info','Inbound call detected on (813) 706-8798');await z(1200);
+  log('info','Phone ringing… 1 of 6');await z(1500);
+  log('info','Phone ringing… 4 of 6 — no answer');await z(1700);
+  log('warn','Call status: no-answer · Duration: 7s','er');await z(1500);
+  setB('h');bl.textContent="Sam's Phone — without Sqavy, lead is lost";await z(2800);
+  // -- AHA MOMENT #1: Sqavy steps in. Hold here. --
+  log('info','→ Sqavy trigger fired: missed_call_auto_text','ok');await z(1800);
+  log('info','→ Outbound SMS via +1 (813) 694-5720');await z(1200);
+  setC('ch');bz.style.display='none';await z(900);
+  await am("Hey, this is Sam from Napolez Home Services — sorry I missed your call. I'm probably on a job right now. Quick question so I can help you faster: are you looking for (1) a repair quote, (2) an emergency same-day service, or (3) something else? Just reply 1, 2, or 3.",'f',{tp:1400});
+  log('info','→ SMS delivered in 25 seconds','ok');await z(6500);
+  // -- Customer engages --
+  await am("1",'m');log('info','← Inbound: "1" — intent: repair_quote','ok');await z(2200);
+  await am("Got it. I do general repairs, demo and junk removal, drywall and paint, full remodels, and home maintenance. Small jobs start at $150. What's the job and where are you located? A few photos help if you can send them.",'f',{tp:1800});await z(6000);
+  await am("Drywall patch — about 3ft hole where a doorknob went through. Carrollwood near Bearss Ave. Need it done before Monday for an inspection.",'m');
+  log('info','← job=drywall_patch, location=Carrollwood','ok');await z(3500);
+  await ap('m');log('info','← Photo 1 received');await z(1400);
+  await ap('m');log('info','← Photo 2 received');await z(2000);
+  // -- Quote moment: let them see the value of an instant quote --
+  await am("Got the pics — that's a standard doorknob blowout, totally fixable. Cut, install a backer, patch, mud, texture match, paint. Usually $180–$250 depending on texture match. About 2 hours on site.",'f',{tp:2200});
+  log('info','→ Quote generated: $180–$250 · 2hr');await z(6500);
+  await am("That works. What's the earliest you can do Saturday?",'m');
+  log('info','← Scheduling intent · preferred_day=Saturday');await z(2200);
+  await am("Saturday is wide open for me. Pick a time below and I'll lock it in:",'f',{tp:1400});await z(1200);
+  await ab();log('info','→ Calendar slots sent');await z(4500);
+  await am("10am Saturday works great",'m');
+  log('info','← Booking selected: Sat 5/16, 10:00 AM','ok');await z(2200);
+  // -- AHA MOMENT #2: the booking lands. Hold here too. --
+  await am("You're booked. Saturday May 16, 10:00 AM. Estimated $180–$250. I'll text you 30 minutes before I head over. What's the address so I can pull up directions?",'f',{tp:1800});
+  log('info','→ Calendar entry created · napolez/2026-05-16T10:00','ok');await z(6500);
+  await am("12409 Tilden Dr, Tampa 33612",'m');log('info','← Address captured');await z(1800);
+  await am("Got it. See you Saturday at 10. Bring cash, Venmo, or Zelle — whatever's easiest. Save my number so you can reach me direct if anything changes. — Sam",'f',{tp:1600});await z(4400);
+  await am("Perfect, thanks Sam!",'m');
+  log('info','← Conversation closed · customer satisfied','ok');await z(1500);
+  log('info','✓ Lead recovered. Job booked. Address captured.','ok');await z(1200);
+  sp.classList.add('on');sp.scrollIntoView({behavior:'smooth',block:'center'});
+  sb.disabled=false;R=false;
+}
+function reset(){R=false;sb.disabled=false;setC('c');setB('c');bl.textContent="Sam's Phone — without Sqavy";bz.style.display='block';clr();tr.style.display='none';lb.innerHTML='<div class="ll"><span class="lti">[--:--:--]</span> <span class="lv">[idle]</span> Waiting for trigger…</div>';sp.classList.remove('on')}
+sb.addEventListener('click',run);rb.addEventListener('click',reset);
+</script></body></html>
