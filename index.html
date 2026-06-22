@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sqavy — Never Miss Another Lead</title>
+<link rel="icon" type="image/png" href="logo.png">
 <style>
 /* ====================================================================
    BRAND KIT
@@ -40,8 +41,8 @@ img,svg{display:block;max-width:100%}
 /* ---------- Nav ---------- */
 .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
-.logo{font-size:20px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:6px}
-.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--orange)}
+.logo{display:flex;align-items:center}
+.logo img{height:38px;width:38px;border-radius:9px}
 .navlinks{display:flex;gap:26px;font-size:14px;font-weight:600;color:var(--muted)}
 .navlinks a:hover{color:var(--navy)}
 @media(max-width:860px){.navlinks{display:none}}
@@ -216,7 +217,7 @@ footer span{color:#fff;font-weight:700}
 
 <nav class="nav">
   <div class="wrap">
-    <div class="logo"><span class="dot"></span>Sqavy</div>
+    <div class="logo"><img src="logo.png" alt="Sqavy"></div>
     <div class="navlinks">
       <a href="#how">How It Works</a>
       <a href="#features">Features</a>

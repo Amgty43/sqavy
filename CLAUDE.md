@@ -12,7 +12,7 @@ This repo contains two self-contained static HTML artifacts and nothing else —
 ## Sqavy brand kit
 
 - **Colors**: orange `#FF6B01` (primary CTA/accent) and navy `#0A4D8C` (secondary/dark sections), exposed as CSS variables `--orange` / `--navy` (plus `--orange-dark` / `--navy-dark`) in `index.html`'s `:root`. Change the variables, not individual rules.
-- **Logo**: a white "Sqavy" wordmark (`logo.png`) is the intended brand mark but the image file hasn't been added to the repo yet — the nav currently uses a text wordmark stand-in. Swap it in once the file is provided.
+- **Logo**: `logo.png` — a square orange (`#FF6B01`) badge with a dark wordmark, used in `index.html`'s nav (`.logo img`) and as the favicon. Sourced from a vendor-supplied PDF and rasterized to a 512×512 PNG; treat it as the canonical asset rather than re-deriving it.
 - **Brand personality**: professional, modern/AI-forward, trustworthy, results-focused, simple/easy to use. Design direction is clean modern SaaS (think HubSpot / GoHighLevel / Zapier) — light backgrounds, generous whitespace, strong CTAs — not a dark "command-center" or rustic blue-collar look.
 - **Target market**: solo owner-operators and small service businesses (1–10 employees) that rely on phone calls and appointments to win work.
 - **Core message**: "missed call = missed job, we fix that." Headline: "Never Miss Another Lead." Primary CTA: "Book a Demo." Secondary CTA: "See How It Works."
@@ -24,7 +24,6 @@ Sections that are intentionally not final, marked with `PLACEHOLDER` comments in
 - **Pricing** (`#pricing`): no tiers/numbers have been confirmed. Currently a single "coming soon" card instead of fabricated Starter/Pro/Business prices.
 - **Testimonials** (`#testimonials`): no real customer quotes exist yet. Cards are explicitly labeled as placeholders rather than invented names/quotes.
 - **Contact info / booking link** (`#demo-cta`): fake phone/email, CTA links point at `#demo-cta` itself. Replace with the real booking flow, phone, and email before launch.
-- **Logo**: see brand kit above.
 
 When adding real content for any of these, remove the corresponding `PLACEHOLDER` comment and replace the whole block — don't leave placeholder copy mixed in with real data.
 
