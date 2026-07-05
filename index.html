@@ -182,12 +182,19 @@ img,svg{display:block;max-width:100%}
 
 /* ---------- Pricing ---------- */
 .pricing{background:var(--bg)}
-.pricebox{max-width:640px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:18px;padding:40px;text-align:center;box-shadow:0 10px 30px rgba(15,23,42,.06)}
-.pricebox .tag{display:inline-block;background:rgba(255,107,1,.1);color:var(--orange-dark);font-weight:700;font-size:12px;padding:6px 12px;border-radius:20px;margin-bottom:16px}
-.pricebox h3{font-size:22px;font-weight:800;margin-bottom:10px}
-.pricebox p{color:var(--muted);font-size:15px;margin-bottom:24px}
-/* PLACEHOLDER: no confirmed pricing tiers yet — replace this card with real
-   Starter / Pro / Business pricing once numbers are finalized. */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1020px;margin:0 auto}
+.pcard{background:#fff;border:1px solid var(--border);border-radius:18px;padding:32px 26px;position:relative;display:flex;flex-direction:column}
+.pcard.featured{border:2px solid var(--orange);box-shadow:0 16px 40px rgba(255,107,1,.14)}
+.pcard .ptag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-size:11px;font-weight:800;padding:5px 14px;border-radius:20px;white-space:nowrap;letter-spacing:.5px}
+.pcard h3{font-size:18px;font-weight:800;margin-bottom:6px}
+.pcard .price{font-size:36px;font-weight:800;color:var(--navy);margin:10px 0 2px}
+.pcard .price span{font-size:16px;font-weight:500;color:var(--muted)}
+.pcard .setup{font-size:13px;color:var(--muted);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.pcard ul{list-style:none;margin:0 0 24px;padding:0;flex:1}
+.pcard ul li{font-size:14px;color:var(--ink);padding:7px 0;border-bottom:1px solid #f8fafc;display:flex;gap:8px;align-items:flex-start}
+.pcard ul li::before{content:"✓";color:var(--good);font-weight:800;flex-shrink:0}
+.pcard .prepay{font-size:12px;color:var(--muted);text-align:center;margin-top:10px}
+@media(max-width:860px){.pgrid{grid-template-columns:1fr}}
 
 /* ---------- Testimonials ---------- */
 .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
@@ -226,7 +233,7 @@ footer span{color:#fff;font-weight:700}
       <a href="#faq">FAQ</a>
     </div>
     <!-- PLACEHOLDER: point at the real booking link/form when available -->
-    <a class="btn primary" href="#demo-cta" style="padding:10px 20px;font-size:14px">Book a Demo</a>
+    <a class="btn primary" href="mailto:info@sqavy.com?subject=Sqavy%20Demo%20Request" style="padding:10px 20px;font-size:14px">Book a Demo</a>
   </div>
 </nav>
 
@@ -237,7 +244,7 @@ footer span{color:#fff;font-weight:700}
       <h1>Never Miss <span>Another Lead</span></h1>
       <p class="lede">Sqavy responds to missed calls in seconds, qualifies leads automatically, and helps small businesses book more jobs — without hiring additional staff.</p>
       <div class="ctarow">
-        <a class="btn primary" href="#demo-cta">Book a Demo</a>
+        <a class="btn primary" href="mailto:info@sqavy.com?subject=Sqavy%20Demo%20Request">Book a Demo</a>
         <a class="btn ghost" href="#demo">See How It Works</a>
       </div>
     </div>
@@ -333,15 +340,51 @@ footer span{color:#fff;font-weight:700}
 <section class="section pricing" id="pricing">
   <div class="wrap">
     <div class="eyebrow" style="text-align:center;display:block;margin-bottom:10px">Pricing Plans</div>
-    <h2>Simple pricing, built for small teams</h2>
-    <p class="sub">Pricing tiers are still being finalized — book a demo and we'll walk you through current plans.</p>
-    <!-- PLACEHOLDER: replace this single card with real Starter / Pro / Business
-         pricing tiers once numbers are finalized. Do not ship fabricated prices. -->
-    <div class="pricebox">
-      <div class="tag">Pricing — coming soon</div>
-      <h3>Plans built around how many leads you handle</h3>
-      <p>We're finalizing Starter, Pro, and Business tiers. Book a demo and we'll tell you exactly what it costs for a business your size.</p>
-      <a class="btn navy" href="#demo-cta">Book a Demo</a>
+    <h2>Simple pricing, no long-term contracts</h2>
+    <p class="sub">Every plan includes a dedicated Sqavy number, 5-branch SMS qualification flow, and onboarding support. Setup fee is a one-time charge.</p>
+    <div class="pgrid">
+      <div class="pcard">
+        <h3>Starter</h3>
+        <div class="price">$299<span>/mo</span></div>
+        <div class="setup">$499 one-time setup</div>
+        <ul>
+          <li>Missed-call text-back (within 30 sec)</li>
+          <li>5-branch SMS qualification flow</li>
+          <li>Booking link sent automatically</li>
+          <li>Dedicated Sqavy phone number</li>
+          <li>Onboarding &amp; setup support</li>
+        </ul>
+        <a class="btn ghost" href="mailto:info@sqavy.com?subject=Sqavy%20Demo%20Request">Book a Demo</a>
+        <div class="prepay">Annual prepay: pay 10 months, get 12</div>
+      </div>
+      <div class="pcard featured">
+        <div class="ptag">Most Popular</div>
+        <h3>Growth</h3>
+        <div class="price">$599<span>/mo</span></div>
+        <div class="setup">$799 one-time setup</div>
+        <ul>
+          <li>Everything in Starter</li>
+          <li>Appointment reminders (automated)</li>
+          <li>Review request automation</li>
+          <li>Priority onboarding</li>
+        </ul>
+        <a class="btn primary" href="mailto:info@sqavy.com?subject=Sqavy%20Demo%20Request">Book a Demo</a>
+        <div class="prepay">Annual prepay: pay 10 months, get 12</div>
+      </div>
+      <div class="pcard">
+        <h3>Pro</h3>
+        <div class="price">$999<span>/mo</span></div>
+        <div class="setup">$1,499 one-time setup</div>
+        <ul>
+          <li>Everything in Growth</li>
+          <li>Voicemail transcription</li>
+          <li>AI lead qualification</li>
+          <li>Custom AI follow-up sequences</li>
+          <li>Multi-location support</li>
+        </ul>
+        <a class="btn navy" href="mailto:info@sqavy.com?subject=Sqavy%20Demo%20Request">Book a Demo</a>
+        <div class="prepay">Annual prepay: pay 10 months, get 12</div>
+      </div>
     </div>
   </div>
 </section>
@@ -380,14 +423,14 @@ footer span{color:#fff;font-weight:700}
     <h2>Stop losing jobs to voicemail</h2>
     <p class="sub">Tell us about your business and we'll show you exactly how Sqavy would handle your missed calls.</p>
     <div class="ctarow" style="justify-content:center;margin-bottom:30px">
-      <a class="btn primary" href="#demo-cta">Book a Demo</a>
+      <a class="btn primary" href="mailto:info@sqavy.com?subject=Sqavy%20Demo%20Request">Book a Demo</a>
       <a class="btn ghost onlight" href="#demo">See How It Works</a>
     </div>
-    <!-- PLACEHOLDER: swap this box for a real booking form / calendar embed / phone / email -->
     <div class="contactbox">
-      <b>Contact info coming soon.</b><br>
-      Phone: (000) 000-0000 · Email: hello@sqavy.com<br>
-      <em>Placeholder — replace with real contact details and booking link.</em>
+      <b>Reach us directly:</b><br>
+      📞 <a href="tel:+18134210279" style="color:inherit">+1 (813) 421-0279</a> &nbsp;·&nbsp;
+      ✉️ <a href="mailto:info@sqavy.com" style="color:inherit">info@sqavy.com</a><br>
+      <span style="opacity:.7;font-size:12px">Tampa, FL — Sqavy LLC</span>
     </div>
   </div>
 </section>

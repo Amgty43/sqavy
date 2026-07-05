@@ -17,13 +17,33 @@ This repo contains two self-contained static HTML artifacts and nothing else —
 - **Target market**: solo owner-operators and small service businesses (1–10 employees) that rely on phone calls and appointments to win work.
 - **Core message**: "missed call = missed job, we fix that." Headline: "Never Miss Another Lead." Primary CTA: "Book a Demo." Secondary CTA: "See How It Works."
 
+## Business context
+
+- **Entity**: Sqavy LLC — Florida, EIN obtained. Tampa, FL.
+- **Founder**: Tyrell (sole operator — sales, onboarding, and ops).
+- **Live production site**: [www.sqavy.com](https://www.sqavy.com) — hosted on Wix, separate from this repo. This repo's `index.html` is a parallel marketing/demo asset.
+- **Contact**: info@sqavy.com (public-facing) · tyrell@sqavy.com (founder) · +1 (813) 421-0279 (Twilio service line).
+- **Tech stack**: Twilio + Zapier + Zoho Mail (Path B). ~$45–62/mo burn. Five Zapier workflows: missed-call text-back, appointment reminders, review requests, voicemail-to-text, lead qualification.
+- **Pitch**: "I help small businesses stop missing jobs and save time using AI automation." Lead with money saved and jobs recovered, not tech.
+
+## Pricing (confirmed — do not alter without explicit instruction)
+
+| Tier | Monthly | Setup fee | Key additions |
+|---|---|---|---|
+| Starter | $299/mo | $499 | Missed-call text-back, 5-branch SMS, booking link, dedicated number |
+| Growth | $599/mo | $799 | + Appointment reminders, review automation |
+| Pro | $999/mo | $1,499 | + Voicemail transcription, AI lead qualification, custom follow-up, multi-location |
+
+Annual prepay: pay 10 months, get 12 (~17% off). **Do not suggest discounts** unless explicitly asked.
+
+**Exception — do not use as a template**: Customer #1 (Sam Napoles / Napolez Home Services) is grandfathered at $100 setup + $50/mo as a loss-leader proof-of-concept.
+
 ## PLACEHOLDER content in index.html
 
-Sections that are intentionally not final, marked with `PLACEHOLDER` comments in the source — do not invent real-looking data to fill these in:
+Sections that are not yet final, marked with `PLACEHOLDER` comments in the source:
 
-- **Pricing** (`#pricing`): no tiers/numbers have been confirmed. Currently a single "coming soon" card instead of fabricated Starter/Pro/Business prices.
-- **Testimonials** (`#testimonials`): no real customer quotes exist yet. Cards are explicitly labeled as placeholders rather than invented names/quotes.
-- **Contact info / booking link** (`#demo-cta`): fake phone/email, CTA links point at `#demo-cta` itself. Replace with the real booking flow, phone, and email before launch.
+- **Testimonials** (`#testimonials`): no real customer quotes captured yet. Cards are explicitly labeled as placeholders. Do not invent quotes or names — replace the whole block when real quotes are provided.
+- **"Book a Demo" links**: currently point to `mailto:info@sqavy.com`. Replace with a real calendar/booking link when one is set up.
 
 When adding real content for any of these, remove the corresponding `PLACEHOLDER` comment and replace the whole block — don't leave placeholder copy mixed in with real data.
 
