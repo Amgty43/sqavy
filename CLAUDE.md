@@ -36,7 +36,17 @@ This repo contains two self-contained static HTML artifacts and nothing else —
 
 Annual prepay: pay 10 months, get 12 (~17% off). **Do not suggest discounts** unless explicitly asked.
 
-**Exception — do not use as a template**: Customer #1 (Sam Napoles / Napolez Home Services) is grandfathered at $100 setup + $50/mo as a loss-leader proof-of-concept.
+**Exception — do not use as a template**: Customer #1 (Sam Napoles / Napolez Home Services) was grandfathered at $100 setup + $50/mo as a loss-leader — now inactive (see Customer Log below).
+
+## Customer Log
+
+| # | Name / Business | Status | Notes | Last updated |
+|---|---|---|---|---|
+| 1 | Sam Napoles / Napolez Home Services | INACTIVE | Tyrell offered full refund July 2026; Sam declined to accept full amount back. Not using the service. Relationship intact — wants help building his business down the road. Backburner. Legacy pricing was a loss-leader; no material revenue impact. | 2026-07-05 |
+| 2 | Cedrick Sanders | ACTIVE | Closed and onboarded June 2026. | 2026-06-xx |
+| — | Mobile detailing lead (Drew Park) | WARM — follow up | Highest-priority pipeline lead as of last field session. | 2026-07-05 |
+| — | Fix Roofing LLC | FOLLOW UP | Card collected, call pending. | 2026-07-05 |
+| — | Sunbrite Auto Works | FOLLOW UP | Card collected, call pending. | 2026-07-05 |
 
 ## PLACEHOLDER content in index.html
 
