@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sqavy Live Demo — Watch a Missed Call Turn Into a Booked Job</title>
+<link rel="icon" type="image/png" href="logo.png">
+<meta name="description" content="See exactly how Sqavy turns a missed call into a booked job in under 3 minutes — live simulation.">
+<style>
+:root{
+  --orange:#FF6B01;
+  --orange-dark:#e05f00;
+  --navy:#0A4D8C;
+  --navy-dark:#073a6b;
+  --ink:#0f172a;
+  --muted:#64748b;
+  --bg:#f8fafc;
+  --paper:#ffffff;
+  --good:#16a34a;
+  --border:#e5e7eb;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;border-radius:10px;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--orange);color:#fff;box-shadow:0 8px 24px rgba(255,107,1,.35)}
+.btn.navy{background:var(--navy);color:#fff;box-shadow:0 8px 24px rgba(10,77,140,.35)}
+.btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6)}
+
+/* Nav */
+.nav{background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo img{height:36px;width:36px;border-radius:8px}
+.logo-text{font-size:20px;font-weight:800;color:var(--navy)}
+.nav-back{font-size:13px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px}
+.nav-back:hover{color:var(--navy)}
+
+/* Hero banner */
+.demoHero{background:linear-gradient(135deg,#0f172a,var(--navy));color:#fff;padding:48px 0 36px;text-align:center}
+.demoHero .eyebrow{font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#fdba74;margin-bottom:10px}
+.demoHero h1{font-size:clamp(26px,3.5vw,42px);font-weight:800;line-height:1.1;margin-bottom:14px}
+.demoHero h1 span{color:#fdba74}
+.demoHero p{font-size:16px;opacity:.8;max-width:600px;margin:0 auto 0}
+
+/* Demo stage */
+.demoWrap{background:linear-gradient(135deg,#0f172a,var(--navy));color:#fff;padding:0 0 60px}
+.stage{display:flex;gap:32px;flex-wrap:wrap;justify-content:center;margin:32px 0 10px}
+.pw{display:flex;flex-direction:column;align-items:center;gap:12px}
+.plbl{font-size:12px;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:1px;color:#fff}
+.plbl.alt{color:#fca5a5}
+.phone{width:280px;height:560px;background:#1a1a1a;border-radius:38px;padding:12px;box-shadow:0 30px 80px rgba(0,0,0,.45);position:relative}
+.phone::before{content:"";position:absolute;top:18px;left:50%;transform:translateX(-50%);width:80px;height:22px;background:#000;border-radius:12px;z-index:5}
+.scr{width:100%;height:100%;background:#fff;border-radius:28px;overflow:hidden;display:flex;flex-direction:column;color:#111}
+.sbar{height:38px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:600}
+.cv{flex:1;background:linear-gradient(180deg,#1e293b,#0f172a);color:#fff;display:none;flex-direction:column;align-items:center;justify-content:center;padding:0 24px}
+.cv.on{display:flex}
+.cs{font-size:12px;opacity:.7;margin-bottom:18px;letter-spacing:1px;text-transform:uppercase}
+.av{width:96px;height:96px;background:linear-gradient(135deg,var(--navy),var(--orange));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700;margin-bottom:14px;animation:pulse 1.4s infinite}
+.av.np{animation:none;opacity:.6}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,1,.55)}50%{box-shadow:0 0 0 22px rgba(255,107,1,0)}}
+.nm{font-size:21px;font-weight:700;text-align:center}
+.nu{font-size:13px;opacity:.6;margin-top:4px;margin-bottom:26px}
+.rt{margin-top:22px;font-size:13px;opacity:.5;animation:bl 1s infinite}
+@keyframes bl{0%,100%{opacity:.4}50%{opacity:.8}}
+.hv{flex:1;background:linear-gradient(180deg,#fbbf24,#f59e0b);display:none;padding:56px 16px 16px}
+.hv.on{display:flex;flex-direction:column;align-items:center}
+.mb{background:rgba(0,0,0,.85);color:#fff;border-radius:14px;padding:14px;width:100%}
+.ml{font-size:11px;opacity:.6;text-transform:uppercase}
+.mn{font-size:15px;font-weight:600;margin-top:2px}
+.mt{font-size:11px;opacity:.6;margin-top:4px}
+.mc{background:#dc2626;color:#fff;border-radius:12px;padding:10px;margin-top:14px;text-align:center;font-size:13px;font-weight:600}
+.chv{flex:1;background:#f3f4f6;display:none;flex-direction:column}
+.chv.on{display:flex}
+.chh{background:#fff;border-bottom:1px solid #e5e7eb;padding:8px 14px;display:flex;align-items:center;gap:10px}
+.ha{width:32px;height:32px;background:var(--navy);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.hn{font-size:14px;font-weight:600}
+.hs{font-size:11px;color:#6b7280}
+.chb{flex:1;padding:14px;overflow-y:scroll;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.chb::-webkit-scrollbar{width:8px}
+.chb::-webkit-scrollbar-track{background:#e5e7eb;border-radius:4px}
+.chb::-webkit-scrollbar-thumb{background:var(--navy);border-radius:4px;border:1px solid #e5e7eb}
+.msg{max-width:78%;padding:8px 12px;border-radius:16px;font-size:13px;line-height:1.4;animation:sl .3s}
+.msg.f{background:#fff;align-self:flex-start;border-bottom-left-radius:4px}
+.msg.m{background:var(--navy);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.msg .t{display:block;font-size:10px;opacity:.6;margin-top:4px}
+@keyframes sl{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.tp{background:#fff;align-self:flex-start;padding:12px 16px;border-radius:16px;display:none}
+.tp.on{display:block}
+.td{display:inline-block;width:6px;height:6px;background:#9ca3af;border-radius:50%;margin:0 2px;animation:td 1.4s infinite}
+.td:nth-child(2){animation-delay:.2s}
+.td:nth-child(3){animation-delay:.4s}
+@keyframes td{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-6px);opacity:1}}
+.bc{background:linear-gradient(135deg,var(--navy),var(--orange));color:#fff;padding:14px;border-radius:14px;align-self:flex-start;max-width:90%}
+.bc h4{font-size:13px;margin-bottom:8px}
+.bc .sl{background:rgba(255,255,255,.2);padding:8px 10px;border-radius:8px;font-size:12px;margin:4px 0}
+.ctrl{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.log{background:rgba(0,0,0,.35);border-radius:10px;padding:14px;max-width:720px;width:100%;margin:24px auto 0;font-family:Consolas,monospace;font-size:11px;line-height:1.5;min-height:60px}
+.lt{font-size:10px;text-transform:uppercase;opacity:.6;margin-bottom:6px}
+.ll{opacity:0;animation:li .3s forwards}
+.ll .lti{color:#93c5fd}
+.ll .lv{color:#fbbf24}
+.ll.ok .lv{color:#4ade80}
+.ll.er .lv{color:#f87171}
+@keyframes li{to{opacity:1}}
+.sp{background:rgba(34,197,94,.15);border:2px solid rgba(34,197,94,.5);border-radius:14px;padding:22px;max-width:720px;width:100%;margin:16px auto 0;display:none}
+.sp.on{display:block;animation:sl .5s}
+.sp h3{font-size:18px;margin-bottom:14px;text-align:center;color:#86efac}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px}
+.st{text-align:center}
+.sv{font-size:22px;font-weight:800;color:#fff}
+.slb{font-size:11px;opacity:.7;margin-top:3px}
+@media(max-width:720px){.stage{flex-direction:column}.phone{width:240px;height:480px}}
+
+/* Explanation strip */
+.explain{background:var(--paper);padding:56px 0}
+.explain .wrap{max-width:900px}
+.explain h2{font-size:26px;font-weight:800;text-align:center;margin-bottom:8px}
+.explain .sub{text-align:center;color:var(--muted);margin-bottom:40px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px}
+.step{background:var(--bg);border-radius:14px;padding:24px;border:1px solid var(--border)}
+.step .num{width:36px;height:36px;background:var(--orange);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;margin-bottom:12px}
+.step h4{font-size:15px;font-weight:700;margin-bottom:6px}
+.step p{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* Bottom CTA */
+.demoCta{background:linear-gradient(135deg,var(--navy),var(--navy-dark));color:#fff;padding:60px 0;text-align:center}
+.demoCta h2{font-size:28px;font-weight:800;color:#fff;margin-bottom:10px}
+.demoCta p{color:rgba(255,255,255,.75);margin-bottom:28px;font-size:16px}
+.demoCta .ctarow{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:24px}
+.contactline{font-size:14px;color:rgba(255,255,255,.7)}
+.contactline a{color:#fdba74}
+
+footer{background:var(--navy-dark);color:#cbd5e1;text-align:center;padding:24px 0;font-size:13px}
+footer span{color:#fff;font-weight:700}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="logo" href="https://www.sqavy.com">
+      <img src="logo.png" alt="Sqavy">
+      <span class="logo-text">Sqavy</span>
+    </a>
+    <a class="nav-back" href="https://www.sqavy.com">← Back to sqavy.com</a>
+    <a class="btn primary" href="mailto:info@sqavy.com?subject=Sqavy%20Demo%20Request" style="padding:10px 20px;font-size:14px">Book a Demo</a>
+  </div>
+</nav>
+
+<div class="demoHero">
+  <div class="wrap">
+    <div class="eyebrow">Live Simulation</div>
+    <h1>Watch a Missed Call Turn Into<br><span>a Booked Job</span></h1>
+    <p>This is a real-time simulation of what your customers and business experience when Sqavy handles a missed call — no fluff, just the actual flow.</p>
+  </div>
+</div>
+
+<div class="demoWrap">
+  <div class="wrap">
+    <div class="stage">
+      <div class="pw">
+        <div class="plbl">Customer's Phone</div>
+        <div class="phone">
+          <div class="scr">
+            <div class="sbar"><span>2:14</span><span>📶 🔋</span></div>
+            <div class="cv on" id="cc">
+              <div class="cs">Calling…</div>
+              <div class="av">CH</div>
+              <div class="nm">Coastal Home Services</div>
+              <div class="nu">(727) 555-0142</div>
+              <div class="rt">Ringing…</div>
+            </div>
+            <div class="chv" id="ch">
+              <div class="chh">
+                <div class="ha">C</div>
+                <div><div class="hn">Coastal Home Services</div><div class="hs">SMS · +1 (727) 555-0199</div></div>
+              </div>
+              <div class="chb" id="cb"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pw">
+        <div class="plbl alt" id="bl">Owner's Phone — without Sqavy</div>
+        <div class="phone">
+          <div class="scr">
+            <div class="sbar"><span>2:14</span><span>📶 🔋</span></div>
+            <div class="cv on" id="bc">
+              <div class="cs">Incoming Call</div>
+              <div class="av np">📞</div>
+              <div class="nm">Unknown</div>
+              <div class="nu">(813) 555-0177</div>
+              <div class="rt">…on a job, can't answer</div>
+            </div>
+            <div class="hv" id="bh">
+              <div class="mb">
+                <div class="ml">⚠ Missed Call</div>
+                <div class="mn">Unknown · (813) 555-0177</div>
+                <div class="mt">2:14 PM — 6 seconds ago</div>
+              </div>
+              <div class="mc" id="bz">Without Sqavy:<br>An urgent job walks out the door</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ctrl">
+      <button class="btn primary" id="sb">▶ Simulate Missed Call</button>
+      <button class="btn ghost" id="rb">Reset</button>
+    </div>
+
+    <div class="log">
+      <div class="lt">⚙ Sqavy System Log</div>
+      <div id="lb"><div class="ll"><span class="lti">[--:--:--]</span> <span class="lv">[idle]</span> Waiting for trigger…</div></div>
+    </div>
+
+    <div class="sp" id="sp">
+      <h3>✓ Lead Recovered with Sqavy</h3>
+      <div class="sg">
+        <div class="st"><div class="sv">22s</div><div class="slb">Response Time</div></div>
+        <div class="st"><div class="sv">$189–$340</div><div class="slb">Job Booked</div></div>
+        <div class="st"><div class="sv">$0</div><div class="slb">Owner's Time</div></div>
+        <div class="st"><div class="sv">Today 2 PM</div><div class="slb">Appointment</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="explain">
+  <div class="wrap">
+    <h2>What just happened?</h2>
+    <p class="sub">Here's the exact sequence Sqavy runs every time a call goes unanswered.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h4>Call goes unanswered</h4>
+        <p>You're on a job, driving, or otherwise unavailable. The call rings out — normally, that lead is gone.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h4>Sqavy texts in 22 seconds</h4>
+        <p>Your dedicated Sqavy number fires an automatic text the moment the call ends — before the customer even dials someone else.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h4>AI qualifies the lead</h4>
+        <p>Sqavy asks the right questions: job type, urgency, location, photos. Customers feel heard — not ignored.</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h4>Quote and calendar sent automatically</h4>
+        <p>A quote range and open time slots go out without you lifting a finger. The customer picks a time and the job is on your calendar.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="demoCta">
+  <div class="wrap">
+    <h2>Ready to stop losing jobs to voicemail?</h2>
+    <p>Book a free demo — we'll show you exactly how Sqavy would work for your specific trade and schedule.</p>
+    <div class="ctarow">
+      <a class="btn primary" href="mailto:info@sqavy.com?subject=Sqavy%20Demo%20Request">Book a Demo</a>
+      <a class="btn ghost" href="https://www.sqavy.com/#pricing">See Pricing</a>
+    </div>
+    <div class="contactline">
+      📞 <a href="tel:+18134210279">+1 (813) 421-0279</a> &nbsp;·&nbsp;
+      ✉️ <a href="mailto:info@sqavy.com">info@sqavy.com</a> &nbsp;·&nbsp;
+      Tampa, FL — Sqavy LLC
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap"><span>Sqavy</span> — Missed-call text-back &amp; lead recovery for home service businesses.</div>
+</footer>
+
+<script>
+const $=i=>document.getElementById(i);
+const cc=$('cc'),ch=$('ch'),cb=$('cb'),bc=$('bc'),bh=$('bh'),bl=$('bl'),bz=$('bz');
+const sb=$('sb'),rb=$('rb'),lb=$('lb'),sp=$('sp');
+const z=ms=>new Promise(r=>setTimeout(r,ms));
+const lt=()=>{const d=new Date();return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}`};
+
+function log(l,t,c=''){
+  const e=document.createElement('div');
+  e.className='ll '+c;
+  e.innerHTML=`<span class="lti">[${lt()}]</span> <span class="lv">[${l}]</span> ${t}`;
+  lb.appendChild(e);lb.scrollTop=lb.scrollHeight;
+}
+const setB=v=>{bc.classList.toggle('on',v=='c');bh.classList.toggle('on',v=='h')};
+const setC=v=>{cc.classList.toggle('on',v=='c');ch.classList.toggle('on',v=='ch')};
+const clr=()=>{cb.innerHTML=''};
+
+async function am(t,s,o={}){
+  if(o.tp){
+    const e=document.createElement('div');
+    e.className='tp on';
+    e.innerHTML='<span class="td"></span><span class="td"></span><span class="td"></span>';
+    cb.appendChild(e);
+    if(cb.scrollHeight-cb.scrollTop-cb.clientHeight<150)cb.scrollTop=cb.scrollHeight;
+    await z(o.tp);
+    e.remove();
+  }
+  const m=document.createElement('div');
+  m.className='msg '+s;
+  m.innerHTML=`${t}<span class="t">${lt().substring(0,5)}</span>`;
+  cb.appendChild(m);
+  if(cb.scrollHeight-cb.scrollTop-cb.clientHeight<150)cb.scrollTop=cb.scrollHeight;
+}
+async function ap(s){
+  const m=document.createElement('div');
+  m.className='msg '+s;
+  m.style.padding=0;m.style.overflow='hidden';
+  m.innerHTML='<div style="width:140px;height:100px;background:linear-gradient(135deg,#94a3b8,#475569);display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;border-radius:12px">📷</div><span class="t" style="padding:0 8px 6px;display:block">'+lt().substring(0,5)+'</span>';
+  cb.appendChild(m);
+  if(cb.scrollHeight-cb.scrollTop-cb.clientHeight<150)cb.scrollTop=cb.scrollHeight;
+}
+async function ab(){
+  const c=document.createElement('div');
+  c.className='bc';
+  c.innerHTML='<h4>📅 Today\'s open slots:</h4><div class="sl">Today · 2:00 PM</div><div class="sl">Today · 4:30 PM</div><div class="sl">Tomorrow · 9:00 AM</div>';
+  cb.appendChild(c);
+  if(cb.scrollHeight-cb.scrollTop-cb.clientHeight<150)cb.scrollTop=cb.scrollHeight;
+}
+
+let R=false;
+async function run(){
+  if(R)return;R=true;sb.disabled=true;sp.classList.remove('on');clr();lb.innerHTML='';
+  setC('c');setB('c');bl.textContent="Owner's Phone — on a job, can't answer";bz.style.display='block';
+  log('info','Inbound call detected on (727) 555-0142');await z(1200);
+  log('info','Phone ringing… 1 of 6');await z(1500);
+  log('info','Phone ringing… 4 of 6 — no answer');await z(1700);
+  log('warn','Call status: no-answer · Duration: 6s','er');await z(1500);
+  setB('h');bl.textContent="Owner's Phone — without Sqavy, lead is lost";await z(2600);
+
+  log('info','→ Sqavy trigger fired: missed_call_auto_text','ok');await z(1800);
+  log('info','→ Outbound SMS via +1 (727) 555-0199');await z(1200);
+  setC('ch');bz.style.display='none';await z(900);
+  await am("Hey, this is Jordan from Coastal Home Services — sorry I missed your call! I'm probably on a job right now. Quick question so I can help fast: are you dealing with (1) no cooling / AC emergency, (2) routine maintenance or repair, or (3) something else? Reply 1, 2, or 3.",'f',{tp:1400});
+  log('info','→ SMS delivered in 22 seconds','ok');await z(6000);
+
+  await am("1",'m');log('info','← Inbound: "1" — intent: emergency_hvac','ok');await z(2200);
+  await am("Got it — that's our top priority. I can usually get someone out same-day for emergencies. What's going on with the unit, and what's your zip code?",'f',{tp:1800});await z(6000);
+  await am("AC just stopped blowing cold air, it's 95 in the house. We're in Riverview, FL.",'m');
+  log('info','← job=emergency_ac_repair, location=Riverview','ok');await z(3000);
+  await am("That's rough in this heat — let's get you taken care of today. Could be the capacitor, compressor, or refrigerant. Can you send a quick photo of the outdoor unit and the thermostat?",'f',{tp:2000});await z(3500);
+  await ap('m');log('info','← Photo 1 received (outdoor unit)');await z(1400);
+  await ap('m');log('info','← Photo 2 received (thermostat)');await z(2000);
+
+  await am("Thanks — looks like a failed capacitor, those are common and quick to fix. Diagnostic plus likely repair runs $189–$340. I can have someone there within 2 hours.",'f',{tp:2200});
+  log('info','→ Quote generated: $189–$340 · same-day');await z(6000);
+  await am("That works, how soon can someone come?",'m');
+  log('info','← Scheduling intent · urgency=same_day');await z(2200);
+  await am("I've got openings today. Pick a time below and I'll lock it in:",'f',{tp:1400});await z(1200);
+  await ab();log('info','→ Calendar slots sent');await z(4200);
+  await am("2pm works",'m');
+  log('info','← Booking selected: Today, 2:00 PM','ok');await z(2200);
+
+  await am("You're booked for 2:00 PM today. Estimated $189–$340. I'll text you 30 minutes before I head over. What's the address?",'f',{tp:1800});
+  log('info','→ Calendar entry created · coastal/today-14:00','ok');await z(6000);
+  await am("4521 Palm Ridge Dr, Riverview 33578",'m');log('info','← Address captured');await z(1800);
+  await am("Got it, see you at 2. Save my number in case anything changes. — Jordan",'f',{tp:1600});await z(3800);
+  await am("Thank you so much!",'m');
+  log('info','← Conversation closed · customer satisfied','ok');await z(1500);
+  log('info','✓ Lead recovered. Job booked same-day.','ok');await z(1200);
+
+  sp.classList.add('on');sp.scrollIntoView({behavior:'smooth',block:'center'});
+  sb.disabled=false;R=false;
+}
+function reset(){
+  R=false;sb.disabled=false;setC('c');setB('c');
+  bl.textContent="Owner's Phone — without Sqavy";bz.style.display='block';clr();
+  lb.innerHTML='<div class="ll"><span class="lti">[--:--:--]</span> <span class="lv">[idle]</span> Waiting for trigger…</div>';
+  sp.classList.remove('on');
+}
+sb.addEventListener('click',run);rb.addEventListener('click',reset);
+</script>
+</body>
+</html>
