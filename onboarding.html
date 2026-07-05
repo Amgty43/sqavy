@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sqavy Client Setup — New Account Information</title>
+<link rel="icon" type="image/png" href="logo.png">
+<meta name="description" content="Fill out your business details so Sqavy can set up your missed-call text-back system.">
+<style>
+:root{
+  --orange:#FF6B01;
+  --orange-dark:#e05f00;
+  --navy:#0A4D8C;
+  --navy-dark:#073a6b;
+  --ink:#0f172a;
+  --muted:#64748b;
+  --bg:#f8fafc;
+  --paper:#ffffff;
+  --good:#16a34a;
+  --border:#e5e7eb;
+  --red:#dc2626;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 24px}
+
+/* Nav */
+.nav{background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:760px;margin:0 auto;padding:0 24px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo img{height:36px;width:36px;border-radius:8px}
+.logo-text{font-size:20px;font-weight:800;color:var(--navy)}
+.nav-back{font-size:13px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px}
+.nav-back:hover{color:var(--navy)}
+
+/* Page header */
+.pageHead{background:linear-gradient(135deg,var(--navy),var(--navy-dark));color:#fff;padding:48px 24px 40px;text-align:center}
+.pageHead .eyebrow{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#93c5fd;margin-bottom:10px}
+.pageHead h1{font-size:clamp(24px,3vw,36px);font-weight:800;margin-bottom:10px}
+.pageHead p{font-size:15px;opacity:.8;max-width:520px;margin:0 auto}
+
+/* Progress bar */
+.progress{background:var(--paper);border-bottom:1px solid var(--border);padding:16px 24px}
+.progress .inner{display:flex;align-items:center;gap:8px;max-width:760px;margin:0 auto}
+.pstep{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--muted);flex:1}
+.pstep.active{color:var(--navy)}
+.pstep.done{color:var(--good)}
+.pnum{width:24px;height:24px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+.pstep.active .pnum{background:var(--navy);color:#fff}
+.pstep.done .pnum{background:var(--good);color:#fff}
+.pdiv{flex-shrink:0;height:2px;width:24px;background:var(--border)}
+.pstep.done+.pdiv,.pstep.done~.pdiv{background:var(--good)}
+@media(max-width:600px){.pstep span{display:none}}
+
+/* Form sections */
+.formBody{padding:32px 0 60px}
+.section-card{background:var(--paper);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:20px}
+.section-card h2{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.section-card .sh{font-size:13px;color:var(--muted);margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.field:last-child{margin-bottom:0}
+label{font-size:13px;font-weight:700;color:var(--ink)}
+label .req{color:var(--red);margin-left:2px}
+label .hint{font-weight:400;color:var(--muted);margin-left:6px}
+input,textarea,select{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:14px;font-family:inherit;color:var(--ink);background:#fff;transition:border-color .15s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--navy)}
+input::placeholder,textarea::placeholder{color:#9ca3af}
+textarea{resize:vertical;min-height:80px}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.chkrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.chk{display:flex;align-items:center;gap:6px;font-size:13px;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;cursor:pointer;transition:border-color .15s,background .15s;user-select:none}
+.chk input[type=checkbox]{width:16px;height:16px;margin:0;cursor:pointer;accent-color:var(--navy)}
+.chk:has(input:checked){border-color:var(--navy);background:#eff6ff}
+.note{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* Hours grid */
+.hours-grid{display:grid;grid-template-columns:110px 1fr 1fr;gap:10px;align-items:center;font-size:13px}
+.hours-grid .day{font-weight:600}
+.hours-grid .closed-toggle{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);grid-column:2/-1;cursor:pointer}
+.hours-grid input[type=time]{padding:8px 10px;font-size:13px}
+
+/* Submit section */
+.submitSec{background:var(--paper);border:1px solid var(--border);border-radius:16px;padding:28px;text-align:center}
+.submitSec p{font-size:14px;color:var(--muted);margin-bottom:20px;max-width:500px;margin-left:auto;margin-right:auto}
+.btn-submit{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 40px;border-radius:10px;font-weight:800;font-size:16px;border:none;cursor:pointer;background:var(--orange);color:#fff;box-shadow:0 8px 24px rgba(255,107,1,.35);transition:transform .15s,box-shadow .15s;width:100%;max-width:400px}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,107,1,.45)}
+.privacy{font-size:11px;color:var(--muted);margin-top:14px}
+
+/* Success screen */
+.success{display:none;background:var(--paper);border:2px solid rgba(22,163,74,.4);border-radius:16px;padding:40px 28px;text-align:center;margin-bottom:20px}
+.success.on{display:block;animation:fadeIn .4s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.success .icon{font-size:48px;margin-bottom:16px}
+.success h2{font-size:22px;font-weight:800;color:var(--good);margin-bottom:8px}
+.success p{font-size:14px;color:var(--muted);max-width:480px;margin:0 auto 20px}
+.success a{display:inline-block;padding:12px 28px;background:var(--navy);color:#fff;border-radius:10px;font-weight:700;font-size:14px}
+
+footer{background:var(--navy-dark);color:#cbd5e1;text-align:center;padding:24px 0;font-size:13px}
+footer span{color:#fff;font-weight:700}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <a class="logo" href="https://www.sqavy.com">
+      <img src="logo.png" alt="Sqavy">
+      <span class="logo-text">Sqavy</span>
+    </a>
+    <a class="nav-back" href="https://www.sqavy.com">← Back to sqavy.com</a>
+  </div>
+</nav>
+
+<div class="pageHead">
+  <div class="eyebrow">New Client Setup</div>
+  <h1>Let's Get Your Account Ready</h1>
+  <p>Fill out the details below so we can configure Sqavy specifically for your business. This takes about 5 minutes.</p>
+</div>
+
+<div class="progress">
+  <div class="inner">
+    <div class="pstep active" id="ps1"><div class="pnum">1</div><span>Your Business</span></div>
+    <div class="pdiv"></div>
+    <div class="pstep" id="ps2"><div class="pnum">2</div><span>Your Hours</span></div>
+    <div class="pdiv"></div>
+    <div class="pstep" id="ps3"><div class="pnum">3</div><span>SMS Setup</span></div>
+    <div class="pdiv"></div>
+    <div class="pstep" id="ps4"><div class="pnum">4</div><span>Preferences</span></div>
+  </div>
+</div>
+
+<div class="formBody">
+  <div class="wrap">
+
+    <div class="success" id="successBox">
+      <div class="icon">✅</div>
+      <h2>We've got everything — thanks!</h2>
+      <p>Tyrell will review your setup details and reach out within 1 business day to confirm your Sqavy account is live. Check your email for a copy of what you submitted.</p>
+      <a href="https://www.sqavy.com">Back to Sqavy.com</a>
+    </div>
+
+    <form id="setupForm" novalidate>
+
+      <!-- Section 1: Business Info -->
+      <div class="section-card">
+        <h2>🏢 Your Business</h2>
+        <div class="sh">Basic info so we know who we're setting up.</div>
+
+        <div class="grid2">
+          <div class="field">
+            <label>Business Name<span class="req">*</span></label>
+            <input type="text" name="businessName" placeholder="e.g. Coastal Home Services" required>
+          </div>
+          <div class="field">
+            <label>Your Name<span class="req">*</span><span class="hint">(owner/contact)</span></label>
+            <input type="text" name="ownerName" placeholder="First and last name" required>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="field">
+            <label>Your Email<span class="req">*</span></label>
+            <input type="email" name="ownerEmail" placeholder="you@yourbusiness.com" required>
+          </div>
+          <div class="field">
+            <label>Your Cell / Best Number<span class="req">*</span></label>
+            <input type="tel" name="ownerPhone" placeholder="(555) 000-0000" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Business Phone<span class="req">*</span><span class="hint">(the number customers call)</span></label>
+          <input type="tel" name="businessPhone" placeholder="The number that rings when customers call you" required>
+        </div>
+
+        <div class="field">
+          <label>Type of Business<span class="req">*</span></label>
+          <select name="businessType" required>
+            <option value="">Select your trade…</option>
+            <option>HVAC / Air Conditioning</option>
+            <option>Plumbing</option>
+            <option>Electrical</option>
+            <option>General Repair / Handyman</option>
+            <option>Remodeling / Construction</option>
+            <option>Lawn Care / Landscaping</option>
+            <option>Cleaning / Janitorial</option>
+            <option>Pest Control</option>
+            <option>Roofing</option>
+            <option>Painting</option>
+            <option>Pool Service</option>
+            <option>Other Home Services</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Service Area<span class="req">*</span><span class="hint">(cities or zip codes)</span></label>
+          <textarea name="serviceArea" placeholder="e.g. Tampa, Brandon, Riverview, Valrico — or list zip codes" required></textarea>
+        </div>
+      </div>
+
+      <!-- Section 2: Business Hours -->
+      <div class="section-card">
+        <h2>🕐 Business Hours</h2>
+        <div class="sh">When should Sqavy expect calls? We use this to note after-hours vs. during-hours missed calls.</div>
+
+        <div class="hours-grid">
+          <div class="day">Monday</div>
+          <input type="time" name="mon_open" value="08:00">
+          <input type="time" name="mon_close" value="17:00">
+
+          <div class="day">Tuesday</div>
+          <input type="time" name="tue_open" value="08:00">
+          <input type="time" name="tue_close" value="17:00">
+
+          <div class="day">Wednesday</div>
+          <input type="time" name="wed_open" value="08:00">
+          <input type="time" name="wed_close" value="17:00">
+
+          <div class="day">Thursday</div>
+          <input type="time" name="thu_open" value="08:00">
+          <input type="time" name="thu_close" value="17:00">
+
+          <div class="day">Friday</div>
+          <input type="time" name="fri_open" value="08:00">
+          <input type="time" name="fri_close" value="17:00">
+
+          <div class="day">Saturday</div>
+          <input type="time" name="sat_open" value="09:00">
+          <input type="time" name="sat_close" value="14:00">
+
+          <div class="day">Sunday</div>
+          <input type="time" name="sun_open" value="">
+          <input type="time" name="sun_close" value="">
+        </div>
+        <p class="note" style="margin-top:12px">Leave start/end blank for any day you're closed.</p>
+
+        <div class="field" style="margin-top:16px">
+          <label>Emergency / After-Hours?</label>
+          <div class="chkrow">
+            <label class="chk"><input type="checkbox" name="emergency" value="yes"> I handle emergencies outside business hours</label>
+            <label class="chk"><input type="checkbox" name="on_call" value="yes"> I'm sometimes on-call nights or weekends</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: SMS Setup -->
+      <div class="section-card">
+        <h2>💬 SMS Configuration</h2>
+        <div class="sh">How Sqavy will text back your missed callers on your behalf.</div>
+
+        <div class="field">
+          <label>Preferred Name in Texts<span class="req">*</span><span class="hint">"Hi, this is ___ from…"</span></label>
+          <input type="text" name="smsName" placeholder="e.g. Jordan, Mike, Sarah — or your business name" required>
+        </div>
+
+        <div class="field">
+          <label>Booking / Scheduling Link<span class="hint">(optional but recommended)</span></label>
+          <input type="url" name="bookingLink" placeholder="e.g. https://calendly.com/yourname or Housecall Pro link">
+          <span class="note">If you don't have one, Sqavy will use a conversational back-and-forth to capture the booking.</span>
+        </div>
+
+        <div class="field">
+          <label>Notification Email<span class="req">*</span><span class="hint">(where you want lead alerts sent)</span></label>
+          <input type="email" name="notifEmail" placeholder="you@yourbusiness.com" required>
+        </div>
+
+        <div class="field">
+          <label>Job Types You Handle<span class="req">*</span><span class="hint">(check all that apply)</span></label>
+          <div class="chkrow">
+            <label class="chk"><input type="checkbox" name="jobs" value="emergency"> Emergency / Urgent</label>
+            <label class="chk"><input type="checkbox" name="jobs" value="repair"> Repair / Service Call</label>
+            <label class="chk"><input type="checkbox" name="jobs" value="installation"> Installation</label>
+            <label class="chk"><input type="checkbox" name="jobs" value="maintenance"> Maintenance / Tune-Up</label>
+            <label class="chk"><input type="checkbox" name="jobs" value="estimate"> Free Estimate / Quote</label>
+            <label class="chk"><input type="checkbox" name="jobs" value="recurring"> Recurring Service</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Typical Job Price Range<span class="hint">(approximate)</span></label>
+          <select name="priceRange">
+            <option value="">Select a range…</option>
+            <option>Under $100</option>
+            <option>$100 – $300</option>
+            <option>$300 – $750</option>
+            <option>$750 – $1,500</option>
+            <option>$1,500 – $5,000</option>
+            <option>$5,000+</option>
+            <option>Varies widely</option>
+          </select>
+          <span class="note">Sqavy uses this to give realistic quote ranges in its responses.</span>
+        </div>
+      </div>
+
+      <!-- Section 4: Additional Info -->
+      <div class="section-card">
+        <h2>✏️ Preferences & Notes</h2>
+        <div class="sh">Anything else we should know to set Sqavy up right for your business.</div>
+
+        <div class="field">
+          <label>Tone for Text Responses</label>
+          <select name="tone">
+            <option value="professional-friendly">Professional but friendly (default)</option>
+            <option value="casual">Casual / conversational</option>
+            <option value="formal">Formal / corporate</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Anything to always include or avoid?<span class="hint">(optional)</span></label>
+          <textarea name="customNotes" placeholder="e.g. 'Always mention we're licensed and insured', 'Don't quote prices for commercial jobs', 'We don't do plumbing — redirect those calls'"></textarea>
+        </div>
+
+        <div class="field">
+          <label>How did you hear about Sqavy?<span class="hint">(optional)</span></label>
+          <select name="referral">
+            <option value="">Select…</option>
+            <option>Referral from friend or colleague</option>
+            <option>Google search</option>
+            <option>Social media</option>
+            <option>Cold outreach from Sqavy</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="submitSec">
+        <p>By submitting, you confirm all information is accurate and authorize Sqavy LLC to use it to configure your account. A Sqavy team member will follow up within 1 business day.</p>
+        <button type="submit" class="btn-submit" id="submitBtn">Submit Setup Info →</button>
+        <div class="privacy">🔒 Your information is kept confidential and used only to configure your Sqavy account.</div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div style="max-width:760px;margin:0 auto;padding:0 24px">
+    <span>Sqavy</span> — Questions? Email <a href="mailto:info@sqavy.com" style="color:#fdba74">info@sqavy.com</a> or call <a href="tel:+18134210279" style="color:#fdba74">+1 (813) 421-0279</a>
+  </div>
+</footer>
+
+<script>
+const form = document.getElementById('setupForm');
+const successBox = document.getElementById('successBox');
+const submitBtn = document.getElementById('submitBtn');
+
+// Progress step highlighting
+function updateProgress(step) {
+  ['ps1','ps2','ps3','ps4'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (i < step - 1) { el.className = 'pstep done'; el.querySelector('.pnum').textContent = '✓'; }
+    else if (i === step - 1) el.className = 'pstep active';
+    else el.className = 'pstep';
+  });
+}
+
+// Scroll-based progress
+const sections = form.querySelectorAll('.section-card');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = Array.from(sections).indexOf(entry.target);
+      updateProgress(idx + 1);
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => observer.observe(s));
+
+// Build a readable email body from form data
+function buildEmailBody(data) {
+  const lines = [];
+  const labels = {
+    businessName: 'Business Name', ownerName: 'Owner Name', ownerEmail: 'Owner Email',
+    ownerPhone: 'Owner Cell', businessPhone: 'Business Phone', businessType: 'Business Type',
+    serviceArea: 'Service Area',
+    mon_open: 'Mon Open', mon_close: 'Mon Close', tue_open: 'Tue Open', tue_close: 'Tue Close',
+    wed_open: 'Wed Open', wed_close: 'Wed Close', thu_open: 'Thu Open', thu_close: 'Thu Close',
+    fri_open: 'Fri Open', fri_close: 'Fri Close', sat_open: 'Sat Open', sat_close: 'Sat Close',
+    sun_open: 'Sun Open', sun_close: 'Sun Close',
+    smsName: 'SMS Name', bookingLink: 'Booking Link', notifEmail: 'Notification Email',
+    priceRange: 'Price Range', tone: 'Tone', customNotes: 'Notes', referral: 'Referral'
+  };
+  for (const [key, label] of Object.entries(labels)) {
+    if (data[key]) lines.push(`${label}: ${data[key]}`);
+  }
+  // Checkboxes
+  const jobs = data.getAll ? data.getAll('jobs') : [];
+  if (jobs.length) lines.push('Job Types: ' + jobs.join(', '));
+  if (data.emergency) lines.push('Handles emergencies: yes');
+  if (data.on_call) lines.push('On-call: yes');
+  return lines.join('\n');
+}
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Basic required field validation
+  const required = form.querySelectorAll('[required]');
+  let valid = true;
+  required.forEach(el => {
+    el.style.borderColor = '';
+    if (!el.value.trim()) { el.style.borderColor = '#dc2626'; valid = false; el.scrollIntoView({behavior:'smooth',block:'center'}); }
+  });
+  if (!valid) return;
+
+  // Collect form data
+  const fd = new FormData(form);
+  const data = Object.fromEntries(fd.entries());
+  data.jobs = fd.getAll('jobs');
+
+  // Build mailto body
+  const subject = encodeURIComponent(`Sqavy New Client Setup — ${data.businessName || 'New Submission'}`);
+  const body = encodeURIComponent(
+    `NEW SQAVY CLIENT SETUP\nSubmitted: ${new Date().toLocaleString()}\n\n` +
+    `=== BUSINESS INFO ===\n` +
+    `Business Name: ${data.businessName || ''}\n` +
+    `Owner: ${data.ownerName || ''}\n` +
+    `Owner Email: ${data.ownerEmail || ''}\n` +
+    `Owner Cell: ${data.ownerPhone || ''}\n` +
+    `Business Phone: ${data.businessPhone || ''}\n` +
+    `Business Type: ${data.businessType || ''}\n` +
+    `Service Area: ${data.serviceArea || ''}\n\n` +
+    `=== BUSINESS HOURS ===\n` +
+    `Mon: ${data.mon_open||'closed'} – ${data.mon_close||''}\n` +
+    `Tue: ${data.tue_open||'closed'} – ${data.tue_close||''}\n` +
+    `Wed: ${data.wed_open||'closed'} – ${data.wed_close||''}\n` +
+    `Thu: ${data.thu_open||'closed'} – ${data.thu_close||''}\n` +
+    `Fri: ${data.fri_open||'closed'} – ${data.fri_close||''}\n` +
+    `Sat: ${data.sat_open||'closed'} – ${data.sat_close||''}\n` +
+    `Sun: ${data.sun_open||'closed'} – ${data.sun_close||''}\n` +
+    `Emergency/after-hours: ${data.emergency ? 'Yes' : 'No'} | On-call: ${data.on_call ? 'Yes' : 'No'}\n\n` +
+    `=== SMS SETUP ===\n` +
+    `SMS Name: ${data.smsName || ''}\n` +
+    `Booking Link: ${data.bookingLink || 'None'}\n` +
+    `Notification Email: ${data.notifEmail || ''}\n` +
+    `Job Types: ${data.jobs.join(', ') || 'None selected'}\n` +
+    `Price Range: ${data.priceRange || ''}\n\n` +
+    `=== PREFERENCES ===\n` +
+    `Tone: ${data.tone || ''}\n` +
+    `Custom Notes: ${data.customNotes || 'None'}\n` +
+    `Referral: ${data.referral || ''}\n`
+  );
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Opening email…';
+
+  // Open mailto — the browser handles the email client
+  window.location.href = `mailto:info@sqavy.com?subject=${subject}&body=${body}`;
+
+  // Show success after short delay (mailto may open email client)
+  setTimeout(() => {
+    form.style.display = 'none';
+    successBox.classList.add('on');
+    successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 1200);
+});
+</script>
+</body>
+</html>
